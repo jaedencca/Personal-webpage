@@ -213,25 +213,27 @@ header .nav-links .social-link:focus {
 }
 .aboutme-inner {
   display: flex;
-  gap: 28px;
+  gap: 40px;
   align-items: flex-start;
-  flex-wrap: wrap;
 }
 .photo-slot {
-  width: 320px;
+  width: 280px;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 .profile-photo {
-  width: 100%;
-  height: auto;
+  width: 280px;
+  height: 260px;
   border-radius: 12px;
   box-shadow: 0 8px 26px rgba(0,0,0,0.12);
   background: #eaeaea;
   display: block;
-}
-.bio-slot {
-  flex: 1;
-  min-width: 260px;
+  object-fit: cover;
+  margin-bottom: 40px;
+  margin-top: 15px;
 }
 .bio-name {
   margin: 0 0 6px 0;
@@ -239,18 +241,131 @@ header .nav-links .social-link:focus {
   color: #1a3a2a;
 }
 .bio-role {
-  margin: 0 0 12px 0;
+  margin: 0 0 20px 0;
   color: #556;
   font-weight: 600;
 }
+.skills-section {
+  margin-top: auto;
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+.skills-section.mobile-skills {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px solid #d0d0d0;
+}
+.skills-title {
+  font-size: 1.1rem;
+  color: #1a3a2a;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  min-height: 250px;
+}
+.skill-item {
+  margin-bottom: 6px;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.skills-list.has-expanded .skill-item:not(.expanded) {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+}
+.skill-item.expanded {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+.skill-toggle {
+  width: 100%;
+  padding: 8px 12px;
+  background: #3a3a3a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+.skill-toggle:hover {
+  background: #4a4a4a;
+}
+.skill-toggle:focus {
+  outline: 2px solid #2b6cb0;
+  outline-offset: 2px;
+}
+.skill-name {
+  flex: 1;
+}
+.skill-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+.skill-toggle[aria-expanded="true"] .skill-icon {
+  transform: rotate(45deg);
+}
+.skill-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #2a2a2a;
+  color: white;
+  border-radius: 0 0 4px 4px;
+}
+.skill-item.expanded .skill-details {
+  max-height: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
+}
+.skill-details p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+.bio-slot {
+  flex: 1;
+  min-width: 0;
+  padding-top: 12px;
+}
+.bio-paragraphs {
+  max-width: 65ch;
+}
+.bio-paragraphs {
+  max-width: 65ch;
+}
 .bio-paragraphs p {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   color: #333;
   line-height: 1.6;
 }
 
 .projects-area {
-  margin-top: 28px;
+  margin-top: 40px;
 }
 .projects-area h3 {
   margin: 0 0 10px 0;
@@ -289,18 +404,6 @@ header .nav-links .social-link:focus {
 }
 .project-links a:hover {
   text-decoration: underline;
-}
-
-@media (max-width: 800px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  .aboutme-inner {
-    flex-direction: column;
-  }
-  .photo-slot {
-    width: 100%;
-  }
 }
 
 /* Footer */
@@ -316,101 +419,37 @@ header .nav-links .social-link:focus {
   margin: 0 auto;
 }
 
-/* ---------- About Me page styles ---------- */
-.aboutme-container {
-  max-width: 1000px;
-  margin: 28px auto 60px auto;
-  padding: 0 16px;
-}
-.aboutme-inner {
-  display: flex;
-  gap: 28px;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.photo-slot {
-  width: 320px;
-  flex-shrink: 0;
-}
-.profile-photo {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 26px rgba(0,0,0,0.12);
-  background: #eaeaea;
-  display: block;
-}
-.bio-slot {
-  flex: 1;
-  min-width: 260px;
-}
-.bio-name {
-  margin: 0 0 6px 0;
-  font-size: 1.6rem;
-  color: #1a3a2a;
-}
-.bio-role {
-  margin: 0 0 12px 0;
-  color: #556;
-  font-weight: 600;
-}
-.bio-paragraphs p {
-  margin-bottom: 12px;
-  color: #333;
-  line-height: 1.6;
-}
-
-.projects-area {
-  margin-top: 28px;
-}
-.projects-area h3 {
-  margin: 0 0 10px 0;
-}
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.project-card {
-  background: #fff;
-  padding: 14px 14px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, opacity 220ms ease;
-}
-.project-title {
-  margin: 0 0 6px 0;
-  font-size: 1.05rem;
-}
-.project-card:hover,
-.project-card:focus-within {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.14);
-  opacity: 1;
-}
-.project-desc {
-  margin: 0 0 8px 0;
-  color: #444;
-}
-.project-links a {
-  display: inline-block;
-  margin-right: 10px;
-  color: #2b6cb0;
-  text-decoration: none;
-}
-.project-links a:hover {
-  text-decoration: underline;
+@media (max-width: 1042px) {
+  .aboutme-inner {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .photo-slot {
+    width: 100%;
+  }
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+  }
+  .bio-paragraphs {
+    max-width: none;
+  }
+  .bio-slot {
+    width: 100%;
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 800px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  .aboutme-inner {
-    flex-direction: column;
-  }
-  .photo-slot {
-    width: 100%;
+}
+
+@media (max-width: 600px) {
+  .profile-photo {
+    width: 180px;
+    height: 180px;
   }
 }
 
