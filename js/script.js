@@ -60,37 +60,71 @@ if (footerYearEl) {
   footerYearEl.textContent = new Date().getFullYear();
 }
 
-// Skills accordion functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const skillToggles = document.querySelectorAll('.skill-toggle');
+// Skills: load from external JSON (optional) and initialize accordion via event delegation
+async function loadSkillsFromJSON() {
+  const list = document.querySelector('.skills-list[data-skills-src]');
+  if (!list) return; // no external source configured
+  const src = list.getAttribute('data-skills-src');
+  try {
+    const res = await fetch(src, { cache: 'no-cache' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const skills = await res.json();
+    if (!Array.isArray(skills)) return;
+    // Build markup
+    const items = skills.map(s => {
+      const title = (s.title || s.name || '').toString();
+      const details = (s.details || s.description || '').toString();
+      return `
+        <li class="skill-item">
+          <button class="skill-toggle" aria-expanded="false">
+            <span class="skill-name">${title}</span>
+            <span class="skill-icon">+</span>
+          </button>
+          <div class="skill-details">
+            <p>${details}</p>
+          </div>
+        </li>`;
+    }).join('');
+    list.innerHTML = items;
+  } catch (err) {
+    console.warn('Skills JSON load failed; leaving fallback content in place.', err);
+  }
+}
+
+function initSkillsAccordion() {
   const skillsList = document.querySelector('.skills-list');
-  
-  skillToggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      const skillItem = toggle.closest('.skill-item');
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      
-      // Close all other skill items
-      document.querySelectorAll('.skill-item').forEach(item => {
-        if (item !== skillItem) {
-          item.classList.remove('expanded');
-          const otherToggle = item.querySelector('.skill-toggle');
-          otherToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-      
-      // Toggle current item
-      if (isExpanded) {
-        skillItem.classList.remove('expanded');
-        toggle.setAttribute('aria-expanded', 'false');
-        skillsList.classList.remove('has-expanded');
-      } else {
-        skillItem.classList.add('expanded');
-        toggle.setAttribute('aria-expanded', 'true');
-        skillsList.classList.add('has-expanded');
+  if (!skillsList) return;
+  skillsList.addEventListener('click', (e) => {
+    const toggle = e.target.closest('.skill-toggle');
+    if (!toggle || !skillsList.contains(toggle)) return;
+    const skillItem = toggle.closest('.skill-item');
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+    // Close all other skill items
+    skillsList.querySelectorAll('.skill-item').forEach(item => {
+      if (item !== skillItem) {
+        item.classList.remove('expanded');
+        const otherToggle = item.querySelector('.skill-toggle');
+        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
       }
     });
+
+    // Toggle current item
+    if (isExpanded) {
+      skillItem.classList.remove('expanded');
+      toggle.setAttribute('aria-expanded', 'false');
+      skillsList.classList.remove('has-expanded');
+    } else {
+      skillItem.classList.add('expanded');
+      toggle.setAttribute('aria-expanded', 'true');
+      skillsList.classList.add('has-expanded');
+    }
   });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSkillsFromJSON();
+  initSkillsAccordion();
 });
 
 // Handle skills section repositioning for mobile
