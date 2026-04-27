@@ -1,26 +1,18 @@
 [
   {
-    "title": "GIS & Spatial Analysis",
-    "details": "Proficient in geographic information systems, spatial data analysis, and creating maps to visualize geographic patterns and relationships."
+    "title": "GIS & Spatial",
+    "details": "ArcGIS Pro / Online, QGIS, Mapbox / Web Mapping, GeoAI Applications — proficient in geoprocessing, spatial statistics, cartographic design, and web-based mapping."
   },
   {
-    "title": "Data Visualization",
-    "details": "Creating compelling visual narratives through charts, maps, and interactive dashboards to communicate complex data insights."
+    "title": "Python Stack",
+    "details": "GeoPandas, Pandas, NumPy, Rasterio, Shapely, GDAL, Matplotlib, EarthPy, Jupyter Notebooks — end-to-end spatial data workflows from ingestion through analysis and visualization."
   },
   {
-    "title": "Python & R",
-    "details": "Programming and data analysis using Python libraries (pandas, geopandas, matplotlib) and R for statistical computing and graphics."
+    "title": "Data & Analytics",
+    "details": "Data visualization, machine learning (classification, ensemble methods), statistical analysis, and web dashboard development — turning raw data into clear, actionable outputs."
   },
   {
-    "title": "Mapbox & Web Mapping",
-    "details": "Building interactive web maps using Mapbox GL JS, Leaflet, and other web mapping frameworks for dynamic geographic applications."
-  },
-  {
-    "title": "QGIS",
-    "details": "Advanced GIS software for spatial data manipulation, geoprocessing, cartography, and creating professional-quality maps."
-  },
-  {
-    "title": "Statistical Analysis",
-    "details": "Applying statistical methods to analyze data, identify patterns, test hypotheses, and derive meaningful insights from complex datasets."
+    "title": "Web & Other",
+    "details": "HTML / CSS / JavaScript, R / R Studio, prompt engineering, and technical communication — bridging spatial analysis with polished front-end delivery."
   }
 ]
